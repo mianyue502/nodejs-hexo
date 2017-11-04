@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>gulp压缩图片 | 淋雨的天堂</title>
+  <title>使用gulp压缩图片 | 淋雨的天堂</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="这是我的博客处女作，献给了gulp。最近工作不忙，和同事想着将之前臃肿的项目用Gulp打包，这也是我第一次接触gulp，总结到一些打包图片的方法。 全局安装gulp安装gulp之前记得先安装nodejs及其包管理器npm 1$ npm install gulp -g 安装完成后，可使用以下命令查看版本 1$ gulp -v 创建项目并本地安装gulp创建一个项目名为：gulp-demo，打开目录并">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gulp压缩图片">
+<meta property="og:title" content="使用gulp压缩图片">
 <meta property="og:url" content="http://llmmshop.com/post/gulp压缩图片.html">
 <meta property="og:site_name" content="淋雨的天堂">
 <meta property="og:description" content="这是我的博客处女作，献给了gulp。最近工作不忙，和同事想着将之前臃肿的项目用Gulp打包，这也是我第一次接触gulp，总结到一些打包图片的方法。 全局安装gulp安装gulp之前记得先安装nodejs及其包管理器npm 1$ npm install gulp -g 安装完成后，可使用以下命令查看版本 1$ gulp -v 创建项目并本地安装gulp创建一个项目名为：gulp-demo，打开目录并">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-03T07:59:29.058Z">
+<meta property="og:updated_time" content="2017-11-04T02:43:33.276Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gulp压缩图片">
+<meta name="twitter:title" content="使用gulp压缩图片">
 <meta name="twitter:description" content="这是我的博客处女作，献给了gulp。最近工作不忙，和同事想着将之前臃肿的项目用Gulp打包，这也是我第一次接触gulp，总结到一些打包图片的方法。 全局安装gulp安装gulp之前记得先安装nodejs及其包管理器npm 1$ npm install gulp -g 安装完成后，可使用以下命令查看版本 1$ gulp -v 创建项目并本地安装gulp创建一个项目名为：gulp-demo，打开目录并">
   
     <link rel="alternate" href="/atom.xml" title="淋雨的天堂" type="application/atom+xml">
@@ -82,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      gulp压缩图片
+      使用gulp压缩图片
     </h1>
   
 
@@ -113,15 +113,19 @@
 <h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>本次压缩将源代码中src/images文件下的图片压缩到打包文件的dist/images文件夹下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'min-img'</span>, <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">    gulp.src(<span class="string">'src/images/*'</span>)</div><div class="line">        .pipe(imagemin(&#123;</div><div class="line">           optimizationLevel: 5, //默认：3  取值范围：0-7（优化等级）</div><div class="line">           progressive: <span class="literal">true</span>, //默认：<span class="literal">false</span> 无损压缩jpg图片</div><div class="line">           interlaced: <span class="literal">true</span>, //默认：<span class="literal">false</span> 隔行扫描gif进行渲染</div><div class="line">           multipass: <span class="literal">true</span> //默认：<span class="literal">false</span> 多次优化svg直到完全优化</div><div class="line">        &#125;))</div><div class="line">        .pipe(gulp.dest(<span class="string">'dist/images'</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>简单使用时，imagemin的参数可不用配置，直接使用默认值</p>
-<h3 id="深度压缩png图片"><a href="#深度压缩png图片" class="headerlink" title="深度压缩png图片"></a>深度压缩png图片</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'testImagemin'</span>, <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">    gulp.src(<span class="string">'src/images/*.'</span>)</div><div class="line">        .pipe(imagemin(&#123;</div><div class="line">            progressive: <span class="literal">true</span>,</div><div class="line">            svgoPlugins: [&#123;removeViewBox: <span class="literal">false</span>&#125;],</div><div class="line">            use: [pngquant()] //使用pngquant深度压缩png图片</div><div class="line">        &#125;))</div><div class="line">        .pipe(gulp.dest(<span class="string">'dist/images'</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<h3 id="深度压缩png图片"><a href="#深度压缩png图片" class="headerlink" title="深度压缩png图片"></a>深度压缩png图片</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'min-img'</span>, <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">    gulp.src(<span class="string">'src/images/*'</span>)</div><div class="line">        .pipe(imagemin(&#123;</div><div class="line">            progressive: <span class="literal">true</span>,</div><div class="line">            svgoPlugins: [&#123;removeViewBox: <span class="literal">false</span>&#125;],</div><div class="line">            use: [pngquant()] //使用pngquant深度压缩png图片</div><div class="line">        &#125;))</div><div class="line">        .pipe(gulp.dest(<span class="string">'dist/images'</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="用”gulp-cache”只压缩修改的图片，未修改的图片直接从缓存文件读取"><a href="#用”gulp-cache”只压缩修改的图片，未修改的图片直接从缓存文件读取" class="headerlink" title="用”gulp-cache”只压缩修改的图片，未修改的图片直接从缓存文件读取"></a>用”gulp-cache”只压缩修改的图片，未修改的图片直接从缓存文件读取</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'min-img'</span>, <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">    gulp.src(<span class="string">'src/img/*'</span>)</div><div class="line">        .pipe(cache(imagemin(&#123;</div><div class="line">            progressive: <span class="literal">true</span>,</div><div class="line">            svgoPlugins: [&#123;removeViewBox: <span class="literal">false</span>&#125;],</div><div class="line">            use: [pngquant()]</div><div class="line">        &#125;)))</div><div class="line">        .pipe(gulp.dest(<span class="string">'dist/img'</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="使用gulp-smushit-实现大比例压缩"><a href="#使用gulp-smushit-实现大比例压缩" class="headerlink" title="使用gulp-smushit 实现大比例压缩"></a>使用gulp-smushit 实现大比例压缩</h3><p>以上压缩方式实际使用中压缩效果其实并不明显，压缩比例才10%左右。而使用gulp-smushit可实现大比例无损压缩，且配置非常简单。<br>但是缺点是：只识别jpg和png图片，且不识别中文命名，压缩速度慢、使用cache时压缩效果不明显。在此，对jpg/png图片用此插件压缩，其他类型图片依旧用前面的方式压缩。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">/*gulp.task(<span class="string">'min-giImg'</span>, <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">    gulp.src(<span class="string">'public/images/!**!/!*.&#123;gif,ico&#125;'</span>)</div><div class="line">        .pipe(cache(imagemin(&#123;</div><div class="line">            progressive: <span class="literal">true</span>,</div><div class="line">            svgoPlugins: [&#123;removeViewBox: <span class="literal">false</span>&#125;],</div><div class="line">            interlaced: <span class="literal">true</span>,</div><div class="line">            // use: [pngquant()]</div><div class="line">        &#125;)))</div><div class="line">        .pipe(gulp.dest(<span class="string">'dist/images/'</span>));</div><div class="line">&#125;);</div><div class="line"></div><div class="line">gulp.task(<span class="string">'min-pjImg'</span>, <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">    gulp.src(<span class="string">'public/images/!**!/!*.&#123;png,jpg&#125;'</span>)</div><div class="line">        .pipe(smushit(&#123;</div><div class="line">            verbose: <span class="literal">true</span></div><div class="line">        &#125;))</div><div class="line">        .pipe(gulp.dest(<span class="string">'dist/images/'</span>));</div><div class="line">&#125;);*/</div></pre></td></tr></table></figure></p>
+<p>这种方式总体可将图片压缩一半甚至更多</p>
+<h2 id="其他优化图片方式"><a href="#其他优化图片方式" class="headerlink" title="其他优化图片方式"></a>其他优化图片方式</h2><p>推荐一个好用的压缩图片网址：</p>
+<ul>
+<li>TinyPNG 可用于无损大比例压缩图片，地址：<a href="https://tinypng.com/developers，使用简单，还提供开发API，不过每个月只免费500张，多了就得付费了" target="_blank" rel="external">https://tinypng.com/developers，使用简单，还提供开发API，不过每个月只免费500张，多了就得付费了</a></li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://llmmshop.com/post/gulp压缩图片.html" data-id="cj9jk1s2v0000wwr0s5wlix9e" class="article-share-link">Share</a>
+      <a data-url="http://llmmshop.com/post/gulp压缩图片.html" data-id="cj9kq4oi20000xkr04qk9zb0o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -170,7 +174,7 @@
       <ul>
         
           <li>
-            <a href="/post/gulp压缩图片.html">gulp压缩图片</a>
+            <a href="/post/gulp压缩图片.html">使用gulp压缩图片</a>
           </li>
         
           <li>
